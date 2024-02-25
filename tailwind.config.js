@@ -21,6 +21,12 @@ module.exports = {
                 dayliezOrangeLinear:
                     "linear-gradient(180deg,#ff5e20 0%,hsl(24,100%,58%) 100%)",
             }),
+            letterSpacing: {
+                tighter: "-0.6px",
+            },
+            animation: {
+                "slide-in-bottom": "slideInFromBottom 120ms ease-out",
+            },
         },
     },
     plugins: [typography, aspectRatio],

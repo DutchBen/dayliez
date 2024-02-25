@@ -13,12 +13,12 @@ export const HeaderNav = () => {
         >
             <div className="h-[70px] flex justify-between">
                 <Link to="/" className="[&.active]:font-bold">
-                    <DayliezLogo className="h-[70px] w-[70px] pl-[20px]" />
+                    <DayliezLogo className="h-[70px] w-[70px] ml-[20px]" />
                 </Link>
                 <div className="pt-[14px] pr-[20px]">
                     <Link
                         to="/pricing"
-                        className="hover:text-dayliezOffWhite  font-outfit antialiased text-white mr-8"
+                        className="hover:text-dayliezOffWhite font-size-[17px] font-medium font-outfit antialiased text-white mr-[30px]"
                     >
                         Pricing
                     </Link>
