@@ -16,7 +16,7 @@ const IndexPage = () => {
                     </h1>
                     <h2 className="text-[26px] leading-[36px]  text-gray-500 w-fit lg:w-[635px] p-5">
                         We are always looking for companies to join our beta
-                        program. It's free. Get in contact with us to get a
+                        program. It's free. Contact us to get a
                         product demo and let's have a chat.
                     </h2>
                     <div className="flex flex-col justify-center items-center font-outfit w-full max-w-[450px]">
