@@ -4,3 +4,4 @@ export * from "./ContentComponent";
 export * from "./HeaderNav";
 export * from "./Layout";
 export * from "./Footer";
+export * from "./JoinBeta";

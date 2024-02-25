@@ -17,7 +17,7 @@ export const ContentComponent = ({
             backgroundColor={backgroundColor}
             extraClass={extraClass}
         >
-            <div className="max-w-[1076px] mx-auto">{children}</div>
+            <div className="max-w-[1076px] mx-auto w-auto">{children}</div>
         </BaseComponent>
     );
 };

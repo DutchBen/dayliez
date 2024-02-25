@@ -3,9 +3,10 @@ import { Link } from "gatsby";
 
 interface CTAButtonProps {
     size: "small" | "large";
+    text?: string;
 }
 
-export const CTAButton = ({ size = "large" }: CTAButtonProps) => {
+export const CTAButton = ({ size = "large", text }: CTAButtonProps) => {
     const getSizedProps = () => {
         return size === "small"
             ? "leading-5 w-[118px] h-[42px] text-base"
@@ -15,13 +16,10 @@ export const CTAButton = ({ size = "large" }: CTAButtonProps) => {
     return (
         <Link to="/join-beta-form">
             <button
-                className={`bg-black  hover:text-dayliezOffWhite font-outfit rounded-xl antialiased text-white font-semibold ${getSizedProps()}`}
+                className={`bg-black hover:text-dayliezOffWhite font-outfit rounded-xl antialiased text-white font-semibold ${getSizedProps()}`}
             >
-                Get started
+                {text || "Get started"}
             </button>
         </Link>
     );
 };
-
-//letter-spacing -0.3px
-// line-height 30px
