@@ -16,7 +16,7 @@ const IndexPage = () => {
     return (
         <LayoutComponent>
             <ContentComponent>
-                <div className="flex flex-col items-center p-7 mx-auto font-outfit antialiased text-black">
+                <div className="flex flex-col items-center p-7 lg:pt-10 mx-auto font-outfit antialiased text-black">
                     <h1 className="text-[63px] leading-[63px] font-semibold tracking-tighter">
                         Use Dayliez now for free!
                     </h1>

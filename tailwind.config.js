@@ -27,6 +27,12 @@ module.exports = {
             animation: {
                 "slide-in-bottom": "slideInFromBottom 120ms ease-out",
             },
+            gridTemplateRows: {
+                layout: "max-content 1fr max-content",
+            },
+            gridTemplateColumns: {
+                full: "1fr",
+            },
         },
     },
     plugins: [typography, aspectRatio],
