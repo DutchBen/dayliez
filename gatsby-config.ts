@@ -4,7 +4,7 @@ const config: GatsbyConfig = {
     siteMetadata: {
         title: "Dayliez",
         siteUrl: "https://www.dayliez.com",
-        description: "Streamline your standups, help your team focus"
+        description: "Streamline your standups, help your team focus",
     },
     // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
     // If you use VSCode you can also use the GraphQL plugin
@@ -30,6 +30,12 @@ const config: GatsbyConfig = {
                 rule: {
                     include: /assets/,
                 },
+            },
+        },
+        {
+            resolve: `gatsby-plugin-google-analytics`,
+            options: {
+                trackingId: "G-MNMR6X2R2D",
             },
         },
     ],
