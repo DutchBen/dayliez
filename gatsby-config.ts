@@ -38,6 +38,18 @@ const config: GatsbyConfig = {
                 trackingId: "G-MNMR6X2R2D",
             },
         },
+        {
+            resolve: "gatsby-plugin-manifest",
+            options: {
+                name: "Dayliez: Scrum that works",
+                short_name: "Dayliez",
+                start_url: "/",
+                background_color: "#ffffff",
+                theme_color: "#FF5E20",
+                display: "browser",
+                icon: "src/assets/favicon.svg",
+            },
+        },
     ],
 };
 export default config;
