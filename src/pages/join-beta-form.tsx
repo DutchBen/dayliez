@@ -128,7 +128,7 @@ const IndexPage = () => {
                                         />
                                         {formErrors.includes("name") && (
                                             <span className="text-red-500">
-                                                Name is required
+                                                Please add a name
                                             </span>
                                         )}
                                     </div>
@@ -141,7 +141,7 @@ const IndexPage = () => {
                                         />
                                         {formErrors.includes("email") && (
                                             <span className="text-red-500">
-                                                Add a valid emailadress
+                                                Please add a valid email
                                             </span>
                                         )}
                                     </div>
