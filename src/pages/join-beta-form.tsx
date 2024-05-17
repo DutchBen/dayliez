@@ -64,28 +64,33 @@ const IndexPage = () => {
 
                                     if (checkName(name) && checkEmail(email)) {
                                         setFormErrors([]);
+                                        const dataToSend = {
+                                            name: formData.get("name"),
+                                            email: formData.get("email"),
+                                            message: formData.get("message"),
+                                        };
+
                                         fetch(
                                             "https://submit-form.com/NUHnqH6kK",
                                             {
                                                 method: "POST",
-                                                body: JSON.stringify({
-                                                    name,
-                                                    email,
-                                                    message,
-                                                }),
+                                                body: JSON.stringify(
+                                                    dataToSend
+                                                ),
                                                 headers: {
                                                     "Content-Type":
                                                         "application/json",
                                                 },
                                             }
                                         )
-                                            .then(() => {
-                                                setFormIsSubmitted(true);
-                                            })
                                             .catch(() => {
                                                 console.log(
                                                     "We catch an error but the form submits just fine"
                                                 );
+                                            })
+                                            .finally(() => {
+                                                setFormErrors([]);
+                                                setFormIsSubmitted(true);
                                             });
                                     } else {
                                         if (!checkName(name)) {
