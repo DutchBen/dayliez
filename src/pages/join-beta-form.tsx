@@ -2,10 +2,30 @@
 import React, { useState } from "react";
 
 import { LayoutComponent, ContentComponent, Footer } from "../components";
+import { execFileSync } from "child_process";
 
 // Step 2: Define your component
 const IndexPage = () => {
+    const emailValidator = (email: string) => {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+    };
+
     const [formIsSubmitted, setFormIsSubmitted] = useState<boolean>(false);
+    const [formErrors, setFormErrors] = useState<string[]>([]);
+    const checkName = (name: string): boolean => {
+        if (name.length > 0) {
+            return true;
+        }
+        return false;
+    };
+
+    const checkEmail = (email: string): boolean => {
+        if (email.length > 0 && emailValidator(email)) {
+            return true;
+        }
+        return false;
+    };
 
     return (
         <LayoutComponent>
@@ -16,8 +36,8 @@ const IndexPage = () => {
                     </h1>
                     <h2 className="text-[26px] leading-[36px]  text-gray-500 w-fit lg:w-[635px] p-5">
                         We are always looking for companies to join our beta
-                        program. It's free. Contact us to get a
-                        product demo and let's have a chat.
+                        program. It's free. Contact us to get a product demo and
+                        let's have a chat.
                     </h2>
                     <div className="flex flex-col justify-center items-center font-outfit w-full max-w-[450px]">
                         {(formIsSubmitted && (
@@ -34,39 +54,92 @@ const IndexPage = () => {
                                     const formData = new FormData(
                                         e.currentTarget
                                     );
-                                    const dataToSend = {
-                                        name: formData.get("name"),
-                                        email: formData.get("email"),
-                                        message: formData.get("message"),
-                                    };
 
-                                    fetch("https://submit-form.com/NUHnqH6kK", {
-                                        method: "POST",
-                                        body: JSON.stringify(dataToSend),
-                                        headers: {
-                                            "Content-Type": "application/json",
-                                        },
-                                    }).catch(() => {
-                                        console.log(
-                                            "We catch an error but the form submits just fine"
-                                        );
-                                    });
-                                    setFormIsSubmitted(true);
+                                    const name =
+                                        (formData.get("name") as string) || "";
+                                    const email =
+                                        (formData.get("email") as string) || "";
+                                    const message =
+                                        formData.get("message") || "";
+
+                                    if (checkName(name) && checkEmail(email)) {
+                                        setFormErrors([]);
+                                        fetch(
+                                            "https://submit-form.com/NUHnqH6kK",
+                                            {
+                                                method: "POST",
+                                                body: JSON.stringify({
+                                                    name,
+                                                    email,
+                                                    message,
+                                                }),
+                                                headers: {
+                                                    "Content-Type":
+                                                        "application/json",
+                                                },
+                                            }
+                                        )
+                                            .then(() => {
+                                                setFormIsSubmitted(true);
+                                            })
+                                            .catch(() => {
+                                                console.log(
+                                                    "We catch an error but the form submits just fine"
+                                                );
+                                            });
+                                    } else {
+                                        if (!checkName(name)) {
+                                            setFormErrors((prev) => [
+                                                ...prev,
+                                                "name",
+                                            ]);
+                                        } else {
+                                            setFormErrors((prev) =>
+                                                prev.filter((e) => e !== "name")
+                                            );
+                                        }
+                                        if (!checkEmail(email)) {
+                                            setFormErrors((prev) => [
+                                                ...prev,
+                                                "email",
+                                            ]);
+                                        } else {
+                                            setFormErrors((prev) =>
+                                                prev.filter(
+                                                    (e) => e !== "email"
+                                                )
+                                            );
+                                        }
+                                    }
                                 }}
                             >
                                 <div className="grid lg:grid-flow-col grid-flow-ro w-full gap-4">
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        placeholder="Name"
-                                        className="appearance-none inline-block lg:w-full leading-normal outline-none border-none p-4 rounded-lg font-medium text-base bg-gray-200 text-black shadow-inner"
-                                    />
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        placeholder="Email"
-                                        className="appearance-none inline-block w-full leading-normal outline-none border-none p-4 rounded-lg font-medium text-base bg-gray-200 text-black shadow-inner"
-                                    />
+                                    <div>
+                                        <input
+                                            type="text"
+                                            name="name"
+                                            placeholder="Name"
+                                            className="appearance-none inline-block lg:w-full leading-normal outline-none border-none p-4 rounded-lg font-medium text-base bg-gray-200 text-black shadow-inner"
+                                        />
+                                        {formErrors.includes("name") && (
+                                            <span className="text-red-500">
+                                                Name is required
+                                            </span>
+                                        )}
+                                    </div>
+                                    <div>
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            placeholder="Email"
+                                            className="appearance-none inline-block w-full leading-normal outline-none border-none p-4 rounded-lg font-medium text-base bg-gray-200 text-black shadow-inner"
+                                        />
+                                        {formErrors.includes("email") && (
+                                            <span className="text-red-500">
+                                                Add a valid emailadress
+                                            </span>
+                                        )}
+                                    </div>
                                 </div>
                                 <textarea
                                     placeholder="Please contact me to schedule a demo and possibly let me join your beta program"
