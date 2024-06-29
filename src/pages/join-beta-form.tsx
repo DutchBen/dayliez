@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 
 import { LayoutComponent, ContentComponent, Footer } from "../components";
-import { execFileSync } from "child_process";
 
 // Step 2: Define your component
 const IndexPage = () => {
@@ -46,121 +45,121 @@ const IndexPage = () => {
                                 touch with you soon!
                             </div>
                         )) || (
-                            <form
-                                className="grid grid-rows-layout grid-cols-full gap-4 w-full lg:w-[540px]"
-                                onSubmit={(e) => {
-                                    e.preventDefault();
+                                <form
+                                    className="grid grid-rows-layout grid-cols-full gap-4 w-full lg:w-[540px]"
+                                    onSubmit={(e) => {
+                                        e.preventDefault();
 
-                                    const formData = new FormData(
-                                        e.currentTarget
-                                    );
+                                        const formData = new FormData(
+                                            e.currentTarget
+                                        );
 
-                                    const name =
-                                        (formData.get("name") as string) || "";
-                                    const email =
-                                        (formData.get("email") as string) || "";
-                                    const message =
-                                        formData.get("message") || "";
+                                        const name =
+                                            (formData.get("name") as string) || "";
+                                        const email =
+                                            (formData.get("email") as string) || "";
+                                        const message =
+                                            formData.get("message") || "";
 
-                                    if (checkName(name) && checkEmail(email)) {
-                                        setFormErrors([]);
-                                        const dataToSend = {
-                                            name: formData.get("name"),
-                                            email: formData.get("email"),
-                                            message: formData.get("message"),
-                                        };
+                                        if (checkName(name) && checkEmail(email)) {
+                                            setFormErrors([]);
+                                            const dataToSend = {
+                                                name: formData.get("name"),
+                                                email: formData.get("email"),
+                                                message: formData.get("message"),
+                                            };
 
-                                        fetch(
-                                            "https://submit-form.com/NUHnqH6kK",
-                                            {
-                                                method: "POST",
-                                                body: JSON.stringify(
-                                                    dataToSend
-                                                ),
-                                                headers: {
-                                                    "Content-Type":
-                                                        "application/json",
-                                                },
-                                            }
-                                        )
-                                            .catch(() => {
-                                                console.log(
-                                                    "We catch an error but the form submits just fine"
+                                            fetch(
+                                                "https://submit-form.com/NUHnqH6kK",
+                                                {
+                                                    method: "POST",
+                                                    body: JSON.stringify(
+                                                        dataToSend
+                                                    ),
+                                                    headers: {
+                                                        "Content-Type":
+                                                            "application/json",
+                                                    },
+                                                }
+                                            )
+                                                .catch(() => {
+                                                    console.log(
+                                                        "We catch an error but the form submits just fine"
+                                                    );
+                                                })
+                                                .finally(() => {
+                                                    setFormErrors([]);
+                                                    setFormIsSubmitted(true);
+                                                });
+                                        } else {
+                                            if (!checkName(name)) {
+                                                setFormErrors((prev) => [
+                                                    ...prev,
+                                                    "name",
+                                                ]);
+                                            } else {
+                                                setFormErrors((prev) =>
+                                                    prev.filter((e) => e !== "name")
                                                 );
-                                            })
-                                            .finally(() => {
-                                                setFormErrors([]);
-                                                setFormIsSubmitted(true);
-                                            });
-                                    } else {
-                                        if (!checkName(name)) {
-                                            setFormErrors((prev) => [
-                                                ...prev,
-                                                "name",
-                                            ]);
-                                        } else {
-                                            setFormErrors((prev) =>
-                                                prev.filter((e) => e !== "name")
-                                            );
+                                            }
+                                            if (!checkEmail(email)) {
+                                                setFormErrors((prev) => [
+                                                    ...prev,
+                                                    "email",
+                                                ]);
+                                            } else {
+                                                setFormErrors((prev) =>
+                                                    prev.filter(
+                                                        (e) => e !== "email"
+                                                    )
+                                                );
+                                            }
                                         }
-                                        if (!checkEmail(email)) {
-                                            setFormErrors((prev) => [
-                                                ...prev,
-                                                "email",
-                                            ]);
-                                        } else {
-                                            setFormErrors((prev) =>
-                                                prev.filter(
-                                                    (e) => e !== "email"
-                                                )
-                                            );
-                                        }
-                                    }
-                                }}
-                            >
-                                <div className="grid lg:grid-flow-col grid-flow-ro w-full gap-4">
-                                    <div>
-                                        <input
-                                            type="text"
-                                            name="name"
-                                            placeholder="Name"
-                                            className="appearance-none inline-block lg:w-full leading-normal outline-none border-none p-4 rounded-lg font-medium text-base bg-gray-200 text-black shadow-inner"
-                                        />
-                                        {formErrors.includes("name") && (
-                                            <span className="text-red-500">
-                                                Please add a name
-                                            </span>
-                                        )}
+                                    }}
+                                >
+                                    <div className="grid lg:grid-flow-col grid-flow-ro w-full gap-4">
+                                        <div>
+                                            <input
+                                                type="text"
+                                                name="name"
+                                                placeholder="Name"
+                                                className="appearance-none inline-block lg:w-full leading-normal outline-none border-none p-4 rounded-lg font-medium text-base bg-gray-200 text-black shadow-inner"
+                                            />
+                                            {formErrors.includes("name") && (
+                                                <span className="text-red-500">
+                                                    Please add a name
+                                                </span>
+                                            )}
+                                        </div>
+                                        <div>
+                                            <input
+                                                type="email"
+                                                name="email"
+                                                placeholder="Email"
+                                                className="appearance-none inline-block w-full leading-normal outline-none border-none p-4 rounded-lg font-medium text-base bg-gray-200 text-black shadow-inner"
+                                            />
+                                            {formErrors.includes("email") && (
+                                                <span className="text-red-500">
+                                                    Please add a valid email
+                                                </span>
+                                            )}
+                                        </div>
                                     </div>
-                                    <div>
-                                        <input
-                                            type="email"
-                                            name="email"
-                                            placeholder="Email"
-                                            className="appearance-none inline-block w-full leading-normal outline-none border-none p-4 rounded-lg font-medium text-base bg-gray-200 text-black shadow-inner"
-                                        />
-                                        {formErrors.includes("email") && (
-                                            <span className="text-red-500">
-                                                Please add a valid email
-                                            </span>
-                                        )}
-                                    </div>
-                                </div>
-                                <textarea
-                                    placeholder="Please contact me to schedule a demo and possibly let me join your beta program"
-                                    name="message"
-                                    className="appearance-none inline-block w-full h-[150px] leading-normal outline-none border-none min-h-0 p-4 resize-y rounded-lg bg-gray-200 font-inter font-medium text-base text-black shadow-inner"
-                                    defaultValue="Please contact me to schedule a demo and me join your beta program"
-                                />
-                                <div>
-                                    <input
-                                        type="submit"
-                                        className="appearance-none inline-block w-full leading-normal outline-none border-none rounded-lg p-4 font-semibold text-base bg-gray-900 cursor-pointer text-white z-10"
-                                        value="Send"
+                                    <textarea
+                                        placeholder="Please contact me to schedule a demo and possibly let me join your beta program"
+                                        name="message"
+                                        className="appearance-none inline-block w-full h-[150px] leading-normal outline-none border-none min-h-0 p-4 resize-y rounded-lg bg-gray-200 font-inter font-medium text-base text-black shadow-inner"
+                                        defaultValue="Please contact me to schedule a demo and me join your beta program"
                                     />
-                                </div>
-                            </form>
-                        )}
+                                    <div>
+                                        <input
+                                            type="submit"
+                                            className="appearance-none inline-block w-full leading-normal outline-none border-none rounded-lg p-4 font-semibold text-base bg-gray-900 cursor-pointer text-white z-10"
+                                            value="Send"
+                                        />
+                                    </div>
+                                </form>
+                            )}
                     </div>
                 </div>
             </ContentComponent>

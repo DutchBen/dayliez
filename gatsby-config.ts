@@ -60,6 +60,9 @@ const config: GatsbyConfig = {
                 icon: "src/assets/favicon.svg",
             },
         },
+        {
+            resolve: "@sentry/gatsby",
+        },
     ],
 };
 export default config;
